@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a183a51416664aa5a1a90a5c7a9667e6" Name="Diagram1" ZoomLevel="79">
+        <EntityTypeShape EntityType="ProiectEHModel.Consultari" Width="1.5" PointX="3.125" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProiectEHModel.Medic" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProiectEHModel.Pacient" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProiectEHModel.sysdiagram" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProiectEHModel.Medic_Pacient" Width="1.5" PointX="3.125" PointY="2.125" IsExpanded="true" />
+        <AssociationConnector Association="ProiectEHModel.FK_Medic_Pacient_Medic" ManuallyRouted="false" />
+        <AssociationConnector Association="ProiectEHModel.FK_Medic_Pacient_Pacient" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

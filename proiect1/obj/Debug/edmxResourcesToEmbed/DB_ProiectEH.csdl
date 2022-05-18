@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ProiectEHModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Consultari">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_Medic" Type="Int32" Nullable="false" />
+    <Property Name="ID_Pacient" Type="Int32" Nullable="false" />
+    <Property Name="Data" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Cost" Type="Double" Nullable="false" />
+    <Property Name="Boala" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Cauze" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Simptome" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Analize_recomandate" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Prescriptie_medicala" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Medic">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nume" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Prenume" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Specializare" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Serie_Parafa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Medic_Pacient" Relationship="Self.FK_Medic_Pacient_Medic" FromRole="Medic" ToRole="Medic_Pacient" />
+    <Property Name="CNP" Type="String" Nullable="false" MaxLength="13" FixedLength="false" Unicode="true" />
+    <Property Name="Parola" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Pacient">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CNP" Type="String" MaxLength="13" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NrBuletin" Type="Int32" Nullable="false" />
+    <Property Name="SerieBuletin" Type="String" MaxLength="3" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Nume" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Prenume" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Mail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Medic_Pacient" Relationship="Self.FK_Medic_Pacient_Pacient" FromRole="Pacient" ToRole="Medic_Pacient" />
+    <Property Name="Parola" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Medic_Pacient">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="ID_Medic" />
+      <PropertyRef Name="ID_Pacient" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_Medic" Type="Int32" Nullable="false" />
+    <Property Name="ID_Pacient" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Medic" Relationship="Self.FK_Medic_Pacient_Medic" FromRole="Medic_Pacient" ToRole="Medic" />
+    <NavigationProperty Name="Pacient" Relationship="Self.FK_Medic_Pacient_Pacient" FromRole="Medic_Pacient" ToRole="Pacient" />
+  </EntityType>
+  <Association Name="FK_Medic_Pacient_Medic">
+    <End Role="Medic" Type="Self.Medic" Multiplicity="1" />
+    <End Role="Medic_Pacient" Type="Self.Medic_Pacient" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Medic">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Medic_Pacient">
+        <PropertyRef Name="ID_Medic" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Medic_Pacient_Pacient">
+    <End Role="Pacient" Type="Self.Pacient" Multiplicity="1" />
+    <End Role="Medic_Pacient" Type="Self.Medic_Pacient" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pacient">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Medic_Pacient">
+        <PropertyRef Name="ID_Pacient" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ProiectEHEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Consultaris" EntityType="Self.Consultari" />
+    <EntitySet Name="Medics" EntityType="Self.Medic" />
+    <EntitySet Name="Pacients" EntityType="Self.Pacient" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="Medic_Pacient" EntityType="Self.Medic_Pacient" />
+    <AssociationSet Name="FK_Medic_Pacient_Medic" Association="Self.FK_Medic_Pacient_Medic">
+      <End Role="Medic" EntitySet="Medics" />
+      <End Role="Medic_Pacient" EntitySet="Medic_Pacient" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Medic_Pacient_Pacient" Association="Self.FK_Medic_Pacient_Pacient">
+      <End Role="Pacient" EntitySet="Pacients" />
+      <End Role="Medic_Pacient" EntitySet="Medic_Pacient" />
+    </AssociationSet>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(ProiectEHModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(ProiectEHModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+  </EntityContainer>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+</Schema>

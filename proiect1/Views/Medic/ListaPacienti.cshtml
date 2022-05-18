@@ -1,0 +1,71 @@
+﻿
+@{
+    ViewBag.Title = "ListaPacienti";
+}
+
+
+<head>
+    <title>Lista Pacienti</title>
+    <link href="//cdn.datatables.net/1.12.0/css/jquery.dataTables.min.css" rel="stylesheet" />
+
+</head>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+
+
+
+<div class="block block-rounded">
+    <div class="vizualizare-form" style="padding: 10px 10px 10px 10px;">
+        <table id="myTable" class="table table-bordered table-striped table-vcenter js-dataTable-full dataTable no-footer">
+            <thead>
+                <tr>
+                    <th>CNP</th>
+                    <th>Nume</th>
+                    <th>Prenume</th>
+                    <th>Optiuni</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
+
+@section scripts{
+
+    <script src="//cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+
+}
+
+<script>
+
+    $(document).ready(function () {
+        var table = $('#myTable').DataTable({
+            "sAjaxSource": "/Medic/LoadData",
+            "sServerMethod": "POST",
+            "bServerSide": true,
+            "bProcessing": true,
+            "bSearchable": true,
+            pageLength: 10,
+            lengthMenu: [[5, 10, 15, 20, 25, 50], [5, 10, 15, 20, 25, 50]],
+            columns: [
+                { data: "CNP", "autowidth": true, searchable: true },
+                { data: "Nume", "autowidth": true, searchable: true },
+                { data: "Prenume", "autowidth": true, searchable: true },
+                {
+                    "defaultContent": "<button type='button' class='btn  btn-primary'>Detalii</button>"
+                }
+            ],
+            error: function (xhr, status, error) {
+                alert('error datatable- ' + error);
+            }
+        });
+
+        $('#myTable tbody').on('click', 'button', function () {
+            var data = table.row($(this).parents('tr')).data();
+            console.log(data);
+            var id = data["Id"];
+            //window.location.href = 'Despre_user?id=' + id;
+        });
+    });
+
+
+</script>

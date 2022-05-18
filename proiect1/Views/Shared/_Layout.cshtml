@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .topnav {
+            overflow: hidden;
+            background-color: #333;
+        }
+
+            .topnav a {
+                float: left;
+                color: #f2f2f2;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+                font-size: 17px;
+            }
+
+                .topnav a:hover {
+                    background-color: #ddd;
+                    color: black;
+                }
+
+                .topnav a.active {
+                    background-color: #04AA6D;
+                    color: white;
+                }
+    </style>
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+
+
+    <div class="topnav">
+        <a href="/Home/ListaConsultatii">Lista consultatii</a>
+        <a href="/Medic/ListaPacienti">Lista pacienti</a>
+        <a href="/Medic/CreareConsultatie">Creeaza raport consultatie</a>
+        <span class="nav-main-link-name">@Html.ActionLink("Delogare", "Delogare", "Home")</span>
+    </div>
+
+    <!--
+    <nav class="navbar navbar-expand-lg navbar-light bg-dark" style="margin-top: -50px;">
+        <div class="container-fluid">
+            <button class="navbar-toggler"
+                    type="button"
+                    data-mdb-toggle="collapse"
+                    data-mdb-target="#navbarNav"
+                    aria-controls="navbarNav"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <div class="navbar">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Lista Consultatii", "ListaConsultatii", "Home")</li>
+
+                        <li>@Html.ActionLink("Lista Pacienti", "ListaPacienti", "Medic")</li>
+                        <li>@Html.ActionLink("Creare Consultatie", "CreareConsultatie", "Medic")</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+        -->
+
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

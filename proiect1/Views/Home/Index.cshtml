@@ -1,0 +1,145 @@
+﻿<section class="vh-100" style="background-color: #9A616D; position:absolute; margin-top: 100px;margin-left: 100px;">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col col-xl-10">
+                <div class="card" style="border-radius: 1rem;">
+                    <div class="row g-0">
+                        <div class="col-md-6 col-lg-5 d-none d-md-block">
+                            <img src="~/Content/images/ehealth.jpg"
+                                 alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;" />
+                        </div>
+                        <div class="col-md-6 col-lg-7 d-flex align-items-center">
+                            <div class="card-body p-4 p-lg-5 text-black">
+
+                                <form action="/Home/Login_User" method="post">
+
+                                    <div class="d-flex align-items-center mb-3 pb-1">
+                                        <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
+                                        <span class="h1 fw-bold mb-0">Autentificare</span>
+                                    </div>
+
+
+                                    <div class="form-outline mb-4">
+                                        <input type="text" id="cnp_input" name="cnp_input" class="form-control form-control-lg" />
+                                        <label class="form-label" for="form2Example17">CNP</label>
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <input type="password" id="password_input" name="password" class="form-control form-control-lg" />
+                                        <label class="form-label" for="form2Example27">Parola</label>
+                                    </div>
+
+                                    <div class="pt-1 mb-4">
+                                        <button class="btn btn-dark btn-lg btn-block" type="submit">Login</button>
+                                    </div>
+
+                                    <p class="mb-5 pb-lg-2">
+                                        Nu ai un cont creat? <a onclick="inregistrare_popup()">Inregistreaza-te!</a>
+                                    </p>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<div id="register_form" style="width: 500px; height: 900px; background-color: lightblue ; visibility:hidden; position: absolute; margin-left: 30%;">
+
+    <form >
+
+        <div id="interior" style="margin-left: 20px; margin-top: 40px;">
+            <p style="color: black;">Inregistrare</p>
+            <div class="form-outline mb-4">
+                <label class="form-label" for="form2Example17">Nume</label>
+                <input type="text" id="nume_input_register" class="form-control form-control-lg" style="background-color: transparent; border-color: black;" />
+
+            </div>
+            <div class="form-outline mb-4">
+                <label class="form-label" for="form2Example17">Prenume</label>
+                <input type="text" id="prenume_input_register" class="form-control form-control-lg" style="background-color: transparent; border-color: black;" />
+
+            </div>
+            <div class="form-outline mb-4">
+                <label class="form-label" for="form2Example17">CNP</label>
+                <input type="text" id="cnp_input_register" class="form-control form-control-lg" style="background-color: transparent; border-color: black;" />
+
+            </div>
+            <div class="form-outline mb-4">
+                <label class="form-label" for="form2Example17">Seria</label>
+                <input type="text" id="seria_input_register" class="form-control form-control-lg" style="background-color: transparent; border-color: black;" />
+
+            </div>
+
+            <div class="form-outline mb-4">
+                <label class="form-label" for="form2Example17">Nr.</label>
+                <input type="text" id="nr_input_register" class="form-control form-control-lg" style="background-color: transparent; border-color: black;" />
+
+            </div>
+
+            <div class="form-outline mb-4">
+                <label class="form-label" for="form2Example17">Mail</label>
+                <input type="email" id="mail_input_register" class="form-control form-control-lg" style="background-color: transparent; border-color: black;" />
+
+            </div>
+
+
+            <div class="form-outline mb-4">
+                <label class="form-label" for="form2Example27">Parola</label>
+                <input type="password" id="password_input_register" class="form-control form-control-lg" style="background-color: transparent; border-color: black;" />
+
+            </div>
+
+            <button class="btn btn-danger" onclick="anulare_register()"> Anulare</button>
+            <button class="btn btn-success" onclick="inregistrare()"> Inregistrare</button>
+
+        </div>
+
+    </form>
+
+</div>
+
+<script type="text/javascript">
+
+    function inregistrare_popup() {
+        var f = document.getElementById("register_form");
+        f.style.visibility = "visible";
+
+    }
+
+    function anulare_register() {
+        var f = document.getElementById("register_form");
+        f.style.visibility = "hidden";
+    }
+
+    function inregistrare() {
+        var obiect = new Object();
+
+
+        obiect.CNP = document.getElementById("cnp_input_register").value;
+        obiect.Nume = document.getElementById("nume_input_register").value;
+        obiect.Prenume = document.getElementById("prenume_input_register").value;
+        obiect.SerieBuletin = document.getElementById("seria_input_register").value;
+        obiect.NrBuletin = document.getElementById("nr_input_register").value;
+        obiect.Mail = document.getElementById("mail_input_register").value;
+        obiect.Parola = document.getElementById("password_input_register").value;
+       
+        
+
+        $.ajax({
+            url: '/Home/Register_User',
+            type: "POST",
+            dataType: "json",
+            data: {
+                param: obiect
+            }
+        }).done(function () {
+            console.log("register");
+        });
+    }
+</script>

@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ProiectEHModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Consultari">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID_Pacient" Type="int" Nullable="false" />
+    <Property Name="ID_Medic" Type="int" Nullable="false" />
+    <Property Name="Data" Type="datetime" Nullable="false" />
+    <Property Name="Cost" Type="float" Nullable="false" />
+    <Property Name="Boala" Type="nvarchar" MaxLength="100" />
+    <Property Name="Cauze" Type="nvarchar" MaxLength="100" />
+    <Property Name="Simptome" Type="nvarchar" MaxLength="100" />
+    <Property Name="Analize_recomandate" Type="nvarchar" MaxLength="100" />
+    <Property Name="Prescriptie_medicala" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Medic">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nume" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Prenume" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Specializare" Type="nvarchar" MaxLength="50" />
+    <Property Name="Serie_Parafa" Type="nvarchar" MaxLength="50" />
+    <Property Name="CNP" Type="nvarchar" MaxLength="13" Nullable="false" />
+    <Property Name="Parola" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'ProiectEH.dbo.Medic_Pacient' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Medic_Pacient">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="ID_Medic" />
+      <PropertyRef Name="ID_Pacient" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID_Medic" Type="int" Nullable="false" />
+    <Property Name="ID_Pacient" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Pacient">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CNP" Type="nvarchar" MaxLength="13" Nullable="false" />
+    <Property Name="NrBuletin" Type="int" Nullable="false" />
+    <Property Name="SerieBuletin" Type="nvarchar" MaxLength="3" Nullable="false" />
+    <Property Name="Nume" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Prenume" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Mail" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Parola" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <Association Name="FK_Medic_Pacient_Medic">
+    <End Role="Medic" Type="Self.Medic" Multiplicity="1" />
+    <End Role="Medic_Pacient" Type="Self.Medic_Pacient" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Medic">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Medic_Pacient">
+        <PropertyRef Name="ID_Medic" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Medic_Pacient_Pacient">
+    <End Role="Pacient" Type="Self.Pacient" Multiplicity="1" />
+    <End Role="Medic_Pacient" Type="Self.Medic_Pacient" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pacient">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Medic_Pacient">
+        <PropertyRef Name="ID_Pacient" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="ProiectEHModelStoreContainer">
+    <EntitySet Name="Consultari" EntityType="Self.Consultari" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Medic" EntityType="Self.Medic" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Pacient" EntityType="Self.Pacient" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Medic_Pacient" EntityType="Self.Medic_Pacient" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Medic_Pacient].[ID] AS [ID], 
+    [Medic_Pacient].[ID_Medic] AS [ID_Medic], 
+    [Medic_Pacient].[ID_Pacient] AS [ID_Pacient]
+    FROM [dbo].[Medic_Pacient] AS [Medic_Pacient]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_Medic_Pacient_Medic" Association="Self.FK_Medic_Pacient_Medic">
+      <End Role="Medic" EntitySet="Medic" />
+      <End Role="Medic_Pacient" EntitySet="Medic_Pacient" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Medic_Pacient_Pacient" Association="Self.FK_Medic_Pacient_Pacient">
+      <End Role="Pacient" EntitySet="Pacient" />
+      <End Role="Medic_Pacient" EntitySet="Medic_Pacient" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
