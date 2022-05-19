@@ -26,15 +26,34 @@ namespace proiect1.Controllers
 
         public ActionResult AdaugaConsultatie(Models.ConsultatieCreare param)
         {
+
             using (var context = new ProiectEHEntities1())
             {
-                //introduc in db un diagnostic
+                var pacient = context.Pacients.Where(x => x.CNP == param.CNP_Pacient).FirstOrDefault();
+                if (pacient != null)
+                {
+                    //am gasit pacientul
+                    Consultari cons = new Consultari();
+                    cons.ID_Pacient = pacient.ID;
+                    cons.Boala = param.Boala;
+                    cons.Cauze = param.Cauze;
+                    cons.Analize_recomandate = param.Analize_Recomandate;
+                    cons.Cost = param.Cost;
+                    cons.Data = param.Data;
+                    cons.Prescriptie_medicala = param.Prescriptie_Medicala;
+                    cons.Simptome = param.Simptome;
+                    cons.ID_Medic = ((Models.CMedic)Session["user"]).ID;
 
-                //introduc o consultatie
+
+                    context.Consultaris.Add(cons);
+                    context.SaveChanges();
+
+                    return Json(new { mesaj = "S-a adaugat cu succes!" }, JsonRequestBehavior.AllowGet);
+                }
+                return Json(new { mesaj = "Nu s-a gasit pacientul!" }, JsonRequestBehavior.AllowGet);
 
             }
 
-            return Json(new { mesaj = "S-a adaugat cu succes!" }, JsonRequestBehavior.AllowGet);
         }
 
 

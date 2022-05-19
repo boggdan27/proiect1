@@ -28,38 +28,35 @@
                     <div class="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
                         <div class="flex flex-col">
                             <label class="leading-loose">CNP Pacient</label>
-                            <input type="text" class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600">
+                            <input type="text" id="cnp_pacient" class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600">
                         </div>
-                        <div class="flex flex-col">
-                            <label class="leading-loose">Nume</label>
-                            <input type="text" class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600">
-                        </div>
-                        <div class="flex flex-col">
-                            <label class="leading-loose">Prenume</label>
-                            <input type="text" class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600">
-                        </div>
+
                         <div class="flex flex-col">
                             <label class="leading-loose">Boala</label>
-                            <input type="text" class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600">
+                            <input type="text" id="boala_pacient" class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600">
                         </div>
                         <div class="flex flex-col">
                             <label class="leading-loose">Cauze</label>
-                            <input type="text" class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600">
+                            <input type="text" id="cauze_pacient" class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600">
                         </div>
                         <div class="flex flex-col">
                             <label class="leading-loose">Simptome</label>
-                            <input type="text" class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600">
+                            <input type="text" id="simptome_pacient" class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600">
                         </div>
 
                         <div class="flex flex-col">
                             <label class="leading-loose">Analize recomandate</label>
-                            <input type="text" class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600">
+                            <input type="text" id="analize_recomandate_pacient" class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600">
                         </div>
                         <div class="flex flex-col">
                             <label class="leading-loose">Prescriptie medicala</label>
-                            <input type="text" class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600">
+                            <input type="text" id="prescriptie_medicala_pacient" class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600">
                         </div>
-                       
+                        <div class="flex flex-col">
+                            <label class="leading-loose">Cost</label>
+                            <input type="text" id="cost_pacient" class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600">
+                        </div>
+
                     </div>
                     <div class="pt-4 flex items-center space-x-4">
 
@@ -82,30 +79,27 @@
 <script>
     function creare_consultatie() {
 
-        var titlu = $('#titlu').val();
-        var descriere = $('#descriere').val();
-        var data = $('#data').val();
-        var cost = $('#cost').val();
 
-        //data de azi
-        //id ul userului
-        //id medic
-        //si fac modificarile
-
-
-        var obj = new Object();
-
-        obj.titlu = titlu;
-        obj.descriere = descriere;
-        obj.data = data;
-        obj.cost = cost;
+        var obiect = new Object();
+            
+        obiect.CNP_Pacient = document.getElementById("cnp_pacient").value;
+        obiect.Boala = document.getElementById("boala_pacient").value;
+        obiect.Cauze = document.getElementById("cauze_pacient").value;
+        obiect.Simptome = document.getElementById("simptome_pacient").value;
+        obiect.Analize_Recomandate = document.getElementById("analize_recomandate_pacient").value;
+        obiect.Prescriptie_Medicala = document.getElementById("prescriptie_medicala_pacient").value;
+        obiect.Cost = document.getElementById("cost_pacient").value;
+        var nowDate = new Date();
+        var date = nowDate.getFullYear() + '/' + (nowDate.getMonth() + 1) + '/' + nowDate.getDate();
+        obiect.Data = date;
+       
 
         $.ajax({
             url: "/Medic/AdaugaConsultatie",
             type: "POST",
             dataType: "json",
             data: {
-                param: obj
+                param: obiect
             },
             success: function (data) {
                 alert(data.mesaj);

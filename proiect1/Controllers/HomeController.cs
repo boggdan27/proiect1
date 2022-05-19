@@ -34,7 +34,7 @@ namespace proiect1.Controllers
 
             using(var context = new ProiectEHEntities1())
             {
-                var citit = context.Pacients.Where(x => x.CNP == cnp).FirstOrDefault();
+                var citit = context.Pacients.Where(x => x.CNP == cnp && x.Parola == password).FirstOrDefault();
                 if (citit != null)
                 {
                     //este pacient
@@ -54,10 +54,11 @@ namespace proiect1.Controllers
                 }
                 else
                 {
-                    var citit2 = context.Medics.Where(x => x.CNP == cnp).FirstOrDefault();
+                    var citit2 = context.Medics.Where(x => x.CNP == cnp && x.Parola == password).FirstOrDefault();
 
                     if (citit2 != null)
                     {
+                        //medic
                         var a = new Models.CMedic();
                         a.ID = citit2.ID;
                         a.CNP = citit2.CNP;
@@ -141,7 +142,7 @@ namespace proiect1.Controllers
             {
                 foreach (var item in context.Consultaris)
                 {
-                    int x = (int)System.Web.HttpContext.Current.Session["ID"];
+                    int x = ((Models.CMedic)Session["user"]).ID;
 
                     if(item.ID_Pacient == x)
                     {
