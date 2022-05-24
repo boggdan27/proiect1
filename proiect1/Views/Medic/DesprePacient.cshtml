@@ -4,3 +4,78 @@
 }
 
 
+<head>
+    <title>Despre Pacient</title>
+    <link href="//cdn.datatables.net/1.12.0/css/jquery.dataTables.min.css" rel="stylesheet" />
+
+</head>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+
+
+<div class="block block-rounded">
+    <div class="vizualizare-form" style="padding: 10px 10px 10px 10px;">
+        <table id="myTable3" class="table table-bordered table-striped table-vcenter js-dataTable-full dataTable no-footer">
+            <thead>
+                <tr>
+                    <th>Nume Pacient</th>
+                    <th>Data</th>
+                    <th>Cost</th>
+                    <th>Boala</th>
+                    <th>Cauze</th>
+                    <th>Simptome</th>
+                    <th>Analize Recomandate</th>
+                    <th>Prescriptie Medicala</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
+
+
+@section scripts{
+
+    <script src="//cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+
+}
+
+
+
+<script>
+
+    $(document).ready(function () {
+        var pagina = window.location.href;
+        var id_permis = pagina.substring(pagina.lastIndexOf('=') + 1);
+
+
+        var table = $('#myTable3').DataTable({
+            "sAjaxSource": "/Medic/LoadDataPacient",
+            "sServerMethod": "POST",
+            "bServerSide": true,
+            "bProcessing": true,
+            "bSearchable": true,
+            "fnServerParams": function (aaData) {
+                aaData.push({ "name": "id_permis", "value": id_permis })
+            },
+            pageLength: 10,
+            lengthMenu: [[5, 10, 15, 20, 25, 50], [5, 10, 15, 20, 25, 50]],
+            columns: [
+                { data: "Nume_pacient", "autowidth": true, searchable: false },
+                { data: "Data", "autowidth": true, searchable: true },
+                { data: "Cost", "autowidth": true, searchable: true },
+                { data: "Boala", "autowidth": true, searchable: true },
+                { data: "Cauze", "autowidth": true, searchable: true },
+                { data: "Simptome", "autowidth": true, searchable: true },
+                { data: "Analize_recomandate", "autowidth": true, searchable: true },
+                { data: "Prescriptie_medicala", "autowidth": true, searchable: true },
+         
+            ],
+            error: function (xhr, status, error) {
+                alert('error datatable- ' + error);
+            }
+        });
+
+    });
+
+
+</script>

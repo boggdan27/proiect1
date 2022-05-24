@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -20,6 +21,12 @@ namespace proiect1.Controllers
         }
 
         public ActionResult CreareConsultatie()
+        {
+            return View();
+        }
+
+        
+        public ActionResult DesprePacient()
         {
             return View();
         }
@@ -100,5 +107,56 @@ namespace proiect1.Controllers
             }, JsonRequestBehavior.AllowGet);
         }
 
+
+        
+        public JsonResult LoadDataPacient(JqueryDataTableParam param)
+        {
+            var id = param.id_permis;
+            var result = new List<Models.CConsultatie>();
+
+            using (var context = new ProiectEHEntities1())
+            {
+                foreach (var item in context.Consultaris)
+                {
+                    if (item.ID_Pacient == id)
+                    {
+                        var aux = new Models.CConsultatie();
+
+                        aux.ID_Pacient = id;
+                        aux.ID_Medic = item.ID_Medic;
+                        aux.Data = item.Data.ToString("dd'/'MM'/'yyyy");
+                        aux.Cost = (float)item.Cost;
+                        aux.Boala = item.Boala;
+                        aux.Cauze = item.Cauze;
+                        aux.Simptome = item.Simptome;
+                        aux.Analize_recomandate = item.Analize_recomandate;
+                        aux.Prescriptie_medicala = item.Prescriptie_medicala;
+
+                        var pacient = context.Pacients.Where(x => x.ID == item.ID_Pacient).FirstOrDefault();
+
+
+                        aux.Nume_pacient = pacient.Prenume;
+                        aux.Nume_pacient += " ";
+                        aux.Nume_pacient += pacient.Nume;
+
+                        result.Add(aux);
+                    }
+
+                }
+            }
+            var displayResult = result.Skip(param.iDisplayStart).Take(param.iDisplayLength).ToList();
+            var totalRecords = result.Count();
+
+            return Json(new
+            {
+                param.sEcho,
+                iTotalRecords = totalRecords,
+                iTotalDisplayRecords = totalRecords,
+                aaData = displayResult
+            }, JsonRequestBehavior.AllowGet);
+
+
+
+        }
     }
 }

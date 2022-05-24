@@ -20,11 +20,42 @@ namespace proiect1.Controllers
             return View();
         }
 
-        public void test(string param)
+        public ActionResult DespreConsultatie()
         {
-            string a = param;
-            int aaa = 2;
+            return View();
         }
+
+
+        public ActionResult LoadDateUser(int param)
+        {
+            var result = new Models.CConsultatie();
+
+            using (var context = new ProiectEHEntities1())
+            {
+                var aux = context.Consultaris.Where(x => x.ID == param).FirstOrDefault();
+
+                result.ID = aux.ID;
+
+                var med = context.Medics.Where(x => x.ID == aux.ID_Medic).FirstOrDefault();
+                result.Nume_Medic = med.Nume;
+                result.Nume_Medic += " ";
+                result.Nume_Medic += med.Prenume;
+
+                result.Data = aux.Data.ToString("dd'/'MM'/'yyyy");
+                result.Cost = (float)aux.Cost;
+                result.Boala = aux.Boala; 
+                result.Cauze = aux.Cauze;
+                result.Simptome = aux.Simptome;
+                result.Analize_recomandate = aux.Analize_recomandate;
+                result.Prescriptie_medicala = aux.Prescriptie_medicala;
+
+            }
+            return Json(new { raspuns = result }, JsonRequestBehavior.AllowGet);
+
+
+        }
+
+
 
         public ActionResult Login_User(FormCollection form)
         {
@@ -77,8 +108,6 @@ namespace proiect1.Controllers
                 return RedirectToAction("Index");
 
             }
-
-
 
         }
 
@@ -142,7 +171,7 @@ namespace proiect1.Controllers
             {
                 foreach (var item in context.Consultaris)
                 {
-                    int x = ((Models.CMedic)Session["user"]).ID;
+                    int x = ((Models.CPacient)Session["user"]).ID;
 
                     if(item.ID_Pacient == x)
                     {
@@ -152,7 +181,7 @@ namespace proiect1.Controllers
                         aux.ID = item.ID;
                         aux.ID_Medic = item.ID_Medic;
                         aux.ID_Pacient = item.ID_Pacient;
-                        aux.Data = item.Data;
+                        aux.Data = item.Data.ToString("dd'/'MM'/'yyyy");
                         aux.Cost = (float)item.Cost;
 
                         var nume_med = context.Medics.Where(p => p.ID == aux.ID_Medic).FirstOrDefault();
@@ -170,6 +199,8 @@ namespace proiect1.Controllers
                         aux.Simptome = item.Simptome;
                         aux.Analize_recomandate = item.Analize_recomandate;
                         aux.Prescriptie_medicala = item.Prescriptie_medicala;
+
+                        result.Add(aux);
                     }
 
                 }

@@ -65,8 +65,8 @@
         $('#myTable2 tbody').on('click', 'button', function () {
             var data = table.row($(this).parents('tr')).data();
             console.log(data);
-            var id = data["Id"];
-            //window.location.href = 'Despre_user?id=' + id;
+            var id = data["ID"];
+            window.location.href = 'DespreConsultatie?id=' + id;
         });
     });
 

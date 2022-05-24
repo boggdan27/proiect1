@@ -8,7 +8,7 @@ namespace proiect1.Models
     public class CConsultatie
     {
         public int ID { get; set; } 
-        public DateTime Data { get; set; }
+        public string Data { get; set; }
         public float Cost { get; set; }
         public int ID_Medic { get; set; }
         public int ID_Pacient { get; set; }

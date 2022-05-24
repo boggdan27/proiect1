@@ -3,5 +3,103 @@
     ViewBag.Title = "DespreConsultatie";
 }
 
-<h2>DespreConsultatie</h2>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
 
+
+
+<div class="block block-rounded" style="width: 600px; margin:auto;">
+    <div class="block-header block-header-default" style="color: white; background-color: #32C1CD ">
+        <h3 class="block-title"><strong>Despre Consultatie</strong></h3>
+    </div>
+
+    <div class="container_about_user" style="margin-top:50px;">
+
+        <div class="grid-container" style="display:grid; grid-template-columns:50% 50%;">
+
+            <div class="row mb-4" style="text-align: center; ">
+                <label type="text" style=" border: 1px solid #ccc; border-radius: 25px; width: 150px; margin-left:50px;"><b>Medic</b></label>
+            </div>
+            <div>
+                <label type="text" id="medic_nume" style=" border: 1px solid #ccc; border-radius: 25px; width: 350px; margin-left: -20px;"></label>
+            </div>
+
+            <div class="row mb-4" style="text-align: center; ">
+                <label type="text" style="border: 1px solid #ccc; border-radius: 25px; width: 150px; margin-left: 50px; "><b>Data</b></label>
+            </div>
+            <div>
+                <label type="text" id="data" style="border: 1px solid #ccc; border-radius: 25px; width: 350px; margin-left: -20px; "></label>
+            </div>
+
+            <div class="row mb-4" style="text-align: center; ">
+                <label type="text" style="border: 1px solid #ccc; border-radius: 25px; width: 150px; margin-left: 50px;"><b>Cost</b></label>
+            </div>
+            <div>
+                <label type="text" id="cost" style=" border: 1px solid #ccc; border-radius: 25px; width: 350px; margin-left: -20px; "></label>
+            </div>
+
+            <div class="row mb-4" style="text-align: center; ">
+                <label type="text" style="border: 1px solid #ccc; border-radius: 25px; width: 150px; margin-left: 50px; "><b>Boala</b></label>
+            </div>
+            <div>
+                <label type="text" id="boala" style=" border: 1px solid #ccc; border-radius: 25px; width: 350px; margin-left: -20px; "></label>
+            </div>
+
+            <div class="row mb-4" style="text-align: center; margin-right: 40px;">
+                <label type="text" style=" border: 1px solid #ccc; border-radius: 25px; width: 150px; margin-left: 50px;"><b>Cauze</b></label>
+            </div>
+            <div>
+                <label type="text" id="cauze" style=" border: 1px solid #ccc; border-radius: 25px; width: 350px; margin-left: -20px;"></label>
+            </div>
+
+            <div class="row mb-4" style="text-align: center; margin-right: 40px;">
+                <label type="text" style=" border: 1px solid #ccc; border-radius: 25px; width: 150px; margin-left: 50px;"><b>Simptome</b></label>
+            </div>
+            <div>
+                <label type="text" id="simptome" style=" border: 1px solid #ccc; border-radius: 25px; width: 350px; margin-left: -20px;"></label>
+            </div>
+
+            <div class="row mb-4" style="text-align: center; margin-right: 40px;">
+                <label type="text" style=" border: 1px solid #ccc; border-radius: 25px; width: 150px; margin-left: 50px;"><b>Analize recomandate</b></label>
+            </div>
+            <div>
+                <label type="text" id="analize_recomandate" style=" border: 1px solid #ccc; border-radius: 25px; width: 350px; margin-left: -20px;"></label>
+            </div>
+
+            <div class="row mb-4" style="text-align: center; margin-right: 40px;">
+                <label type="text" style=" border: 1px solid #ccc; border-radius: 25px; width: 150px; margin-left: 50px;"><b>Prescriptie Medicala</b></label>
+            </div>
+            <div>
+                <label type="text" id="prescriptie_medicala" style=" border: 1px solid #ccc; border-radius: 25px; width: 350px; margin-left: -20px;"></label>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    $(document).ready(function () {
+        var pagina = window.location.href;
+        var id_cautat = pagina.substring(pagina.lastIndexOf('=') + 1);
+
+        $.ajax({
+            url: "/Home/LoadDateUser",
+            type: "POST",
+            dataType: "json",
+            data: {
+                param: id_cautat
+            },
+            success: function (data) {
+                $('#medic_nume').html(data.raspuns["Nume_Medic"]);
+                $('#data').html(data.raspuns["Data"]);
+                $('#cost').html(data.raspuns["Cost"]);
+                $('#boala').html(data.raspuns["Boala"]);
+                $('#cauze').html(data.raspuns["Cauze"]);
+                $('#simptome').html(data.raspuns["Simptome"]);
+                $('#analize_recomandate').html(data.raspuns["Analize_recomandate"]);
+                $('#prescriptie_medicala').html(data.raspuns["Prescriptie_medicala"]);
+
+            }
+        });
+    });
+</script>

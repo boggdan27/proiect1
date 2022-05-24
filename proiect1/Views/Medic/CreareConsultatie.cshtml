@@ -12,58 +12,83 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 </head>
 
+<div class="block block-rounded" style="width: 600px; margin:auto; margin-top: 100px; border-color: black;">
+    <div class="block-header block-header-default" style="color: white; background-color: #22577E">
+        <h3 class="block-title"><strong>Creare raport consultatie</strong></h3>
+    </div>
+    <div class="block-content">
+        <div class="row">
+            <div>
+                <form class="mb-5" action="be_forms_layouts.html" method="POST" onsubmit="return false;">
+
+                    <div class="grid-container" style="display:grid; grid-template-columns:50% 50%;">
+
+                        <div class="row mb-4" style="text-align: right; margin-right:10px;">
+                            <label>CNP Pacient: </label>
+                        </div>
+                        <div>
+                            <input type="text" class="form-control" id="cnp_pacient" maxlength="250" />
+                        </div>
 
 
-<div class="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-2">
-    <div class="relative py-3 sm:max-w-xl sm:mx-auto">
-        <div class="relative px-4 py-10 bg-white mx-8 md:mx-0 shadow rounded-3xl sm:p-10">
-            <div class="max-w-md mx-auto">
-                <div class="flex items-center space-x-5">
-                    <div class="block pl-2 font-semibold text-xl self-start text-gray-700">
-                        <h2 class="leading-relaxed">Creeaza raport consultatie</h2>
+                        <div class="row mb-4" style="text-align: right; margin-right:10px;">
+                            <label>Boala:</label>
+                        </div>
+                        <div>
+                            <input type="text" class="form-control" id="boala_pacient" maxlength="250" />
+
+                        </div>
+
+                        <div class="row mb-4" style="text-align: right; margin-right:10px;">
+                            <label>Cauze:</label>
+                        </div>
+                        <div>
+                            <input type="text" class="form-control" id="cauze_pacient" maxlength="250" />
+
+                        </div>
+
+                        <div class="row mb-4" style="text-align: right; margin-right:10px;">
+                            <label>Simptome:</label>
+                        </div>
+                        <div>
+                            <input type="text" class="form-control" id="simptome_pacient" maxlength="250" />
+
+                        </div>
+
+                        <div class="row mb-4" style="text-align: right; margin-right:10px;">
+                            <label>Analize recomandate:</label>
+                        </div>
+                        <div>
+                            <input type="text" class="form-control" id="analize_recomandate_pacient" maxlength="250" />
+
+                        </div>
+
+                        <div class="row mb-4" style="text-align: right; margin-right:10px;">
+                            <label>Prescriptie medicala:</label>
+                        </div>
+                        <div>
+                            <input type="text" class="form-control" id="prescriptie_medicala_pacient" maxlength="250" />
+
+                        </div>
+
+                        <div class="row mb-4" style="text-align: right; margin-right:10px;">
+                            <label>Cost:</label>
+                        </div>
+                        <div>
+                            <input type="text" class="form-control" id="cost_pacient" maxlength="250" />
+
+                        </div>
 
                     </div>
-                </div>
-                <div class="divide-y divide-gray-200">
-                    <div class="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
-                        <div class="flex flex-col">
-                            <label class="leading-loose">CNP Pacient</label>
-                            <input type="text" id="cnp_pacient" class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600">
-                        </div>
 
-                        <div class="flex flex-col">
-                            <label class="leading-loose">Boala</label>
-                            <input type="text" id="boala_pacient" class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600">
+                    <div class="row mb-4" style="display:flex; justify-content: center; align-items:center; text-align: center;">
+                        <div class="ms-auto">
+                            <button type="submit" class="btn btn-primary" style="background-color: #1DB9C3; color: black; border-color: transparent; margin-bottom: 20px; " onclick="creare_consultatie()">Adauga</button>
                         </div>
-                        <div class="flex flex-col">
-                            <label class="leading-loose">Cauze</label>
-                            <input type="text" id="cauze_pacient" class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600">
-                        </div>
-                        <div class="flex flex-col">
-                            <label class="leading-loose">Simptome</label>
-                            <input type="text" id="simptome_pacient" class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600">
-                        </div>
-
-                        <div class="flex flex-col">
-                            <label class="leading-loose">Analize recomandate</label>
-                            <input type="text" id="analize_recomandate_pacient" class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600">
-                        </div>
-                        <div class="flex flex-col">
-                            <label class="leading-loose">Prescriptie medicala</label>
-                            <input type="text" id="prescriptie_medicala_pacient" class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600">
-                        </div>
-                        <div class="flex flex-col">
-                            <label class="leading-loose">Cost</label>
-                            <input type="text" id="cost_pacient" class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600">
-                        </div>
-
                     </div>
-                    <div class="pt-4 flex items-center space-x-4">
 
-                        <button type="submit" class="btn  btn-primary" style="background-color: #1DB9C3; color: black; border-color: transparent; margin-bottom: 20px; " onclick="creare_consultatie()">Adauga</button>
 
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>

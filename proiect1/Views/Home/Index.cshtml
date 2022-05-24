@@ -1,4 +1,14 @@
-﻿<section class="vh-100" style="background-color: #9A616D; position:absolute; margin-top: 100px;margin-left: 100px;">
+﻿
+
+
+
+
+
+
+
+
+
+<section class="vh-100" style="background-color: #9A616D; position:absolute; margin-top: 100px;margin-left: 100px;">
     <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col col-xl-10">
@@ -41,7 +51,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> 
             </div>
         </div>
     </div>
@@ -49,58 +59,87 @@
 
 
 
-<div id="register_form" style="width: 500px; height: 900px; background-color: lightblue ; visibility:hidden; position: absolute; margin-left: 30%;">
-
-    <form >
-
-        <div id="interior" style="margin-left: 20px; margin-top: 40px;">
-            <p style="color: black;">Inregistrare</p>
-            <div class="form-outline mb-4">
-                <label class="form-label" for="form2Example17">Nume</label>
-                <input type="text" id="nume_input_register" class="form-control form-control-lg" style="background-color: transparent; border-color: black;" />
-
-            </div>
-            <div class="form-outline mb-4">
-                <label class="form-label" for="form2Example17">Prenume</label>
-                <input type="text" id="prenume_input_register" class="form-control form-control-lg" style="background-color: transparent; border-color: black;" />
-
-            </div>
-            <div class="form-outline mb-4">
-                <label class="form-label" for="form2Example17">CNP</label>
-                <input type="text" id="cnp_input_register" class="form-control form-control-lg" style="background-color: transparent; border-color: black;" />
-
-            </div>
-            <div class="form-outline mb-4">
-                <label class="form-label" for="form2Example17">Seria</label>
-                <input type="text" id="seria_input_register" class="form-control form-control-lg" style="background-color: transparent; border-color: black;" />
-
-            </div>
-
-            <div class="form-outline mb-4">
-                <label class="form-label" for="form2Example17">Nr.</label>
-                <input type="text" id="nr_input_register" class="form-control form-control-lg" style="background-color: transparent; border-color: black;" />
-
-            </div>
-
-            <div class="form-outline mb-4">
-                <label class="form-label" for="form2Example17">Mail</label>
-                <input type="email" id="mail_input_register" class="form-control form-control-lg" style="background-color: transparent; border-color: black;" />
-
-            </div>
+<div id="register_form" style="width: 700px; height: 600px; background-color: lightblue ; visibility:hidden; position: absolute; left: 450px; margin-top: 120px;">
 
 
-            <div class="form-outline mb-4">
-                <label class="form-label" for="form2Example27">Parola</label>
-                <input type="password" id="password_input_register" class="form-control form-control-lg" style="background-color: transparent; border-color: black;" />
-
-            </div>
-
-            <button class="btn btn-danger" onclick="anulare_register()"> Anulare</button>
-            <button class="btn btn-success" onclick="inregistrare()"> Inregistrare</button>
-
+    <div class="block block-rounded" style="width: 600px; margin:auto; margin-top: 100px; border-color: black;">
+        <div class="block-header block-header-default" style="color: white; background-color: #22577E">
+            <h3 class="block-title"><strong>Inregistrare</strong></h3>
         </div>
+        <div class="block-content">
+            <div class="row">
+                <div>
+                    <form class="mb-5" action="be_forms_layouts.html" method="POST" onsubmit="return false;">
 
-    </form>
+                        <div class="grid-container" style="display:grid; grid-template-columns:50% 50%;">
+
+                            <div class="row mb-4" style="text-align: right; margin-right:10px;">
+                                <label>Nume: </label>
+                            </div>
+                            <div>
+                                <input type="text" class="form-control" id="nume_input_register" maxlength="250" />
+                            </div>
+
+                            <div class="row mb-4" style="text-align: right; margin-right:10px;">
+                                <label>Prenume: </label>
+                            </div>
+                            <div>
+                                <input type="text" class="form-control" id="prenume_input_register" maxlength="250" />
+                            </div>
+
+                            <div class="row mb-4" style="text-align: right; margin-right:10px;">
+                                <label>CNP: </label>
+                            </div>
+                            <div>
+                                <input type="text" class="form-control" id="cnp_input_register" maxlength="250" />
+                            </div>
+
+                            <div class="row mb-4" style="text-align: right; margin-right:10px;">
+                                <label>Seria: </label>
+                            </div>
+                            <div>
+                                <input type="text" class="form-control" id="seria_input_register" maxlength="250" />
+                            </div>
+
+
+                            <div class="row mb-4" style="text-align: right; margin-right:10px;">
+                                <label>Nr: </label>
+                            </div>
+                            <div>
+                                <input type="text" class="form-control" id="nr_input_register" maxlength="250" />
+                            </div>
+
+
+                            <div class="row mb-4" style="text-align: right; margin-right:10px;">
+                                <label>Mail: </label>
+                            </div>
+                            <div>
+                                <input type="text" class="form-control" id="mail_input_register" maxlength="250" />
+                            </div>
+
+                            <div class="row mb-4" style="text-align: right; margin-right:10px;">
+                                <label>Parola: </label>
+                            </div>
+                            <div>
+                                <input type="text" class="form-control" id="password_input_register" maxlength="250" />
+                            </div>
+
+
+                        </div>
+
+                        <div class="row mb-4" style="display:flex; justify-content: center; align-items:center; text-align: center;">
+                            <div class="ms-auto">
+                                <button class="btn btn-danger" onclick="anulare_register()"> Anulare</button>
+                                <button class="btn btn-success" onclick="inregistrare()"> Inregistrare</button>
+                            </div>
+                        </div>
+
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </div>
 
