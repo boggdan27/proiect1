@@ -20,6 +20,7 @@
     <EntitySetMapping Name="Medics">
       <EntityTypeMapping TypeName="ProiectEHModel.Medic">
         <MappingFragment StoreEntitySet="Medic">
+          <ScalarProperty Name="Role" ColumnName="Role" />
           <ScalarProperty Name="Parola" ColumnName="Parola" />
           <ScalarProperty Name="Serie_Parafa" ColumnName="Serie_Parafa" />
           <ScalarProperty Name="CNP" ColumnName="CNP" />
@@ -33,6 +34,7 @@
     <EntitySetMapping Name="Pacients">
       <EntityTypeMapping TypeName="ProiectEHModel.Pacient">
         <MappingFragment StoreEntitySet="Pacient">
+          <ScalarProperty Name="Role" ColumnName="Role" />
           <ScalarProperty Name="Parola" ColumnName="Parola" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="CNP" ColumnName="CNP" />

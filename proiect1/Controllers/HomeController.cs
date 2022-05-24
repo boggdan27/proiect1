@@ -14,7 +14,6 @@ namespace proiect1.Controllers
         {
             return View();
         }
-
         public ActionResult ListaConsultatii()
         {
             return View();
@@ -80,6 +79,7 @@ namespace proiect1.Controllers
 
                     Session["user"] = a;
                     FormsAuthentication.SetAuthCookie(cnp, false);
+                    FormsAuthentication.SetAuthCookie(a.ID.ToString(), false);
 
                     return RedirectToAction("ListaConsultatii");
                 }
@@ -100,6 +100,7 @@ namespace proiect1.Controllers
 
                         Session["user"] = a;
                         FormsAuthentication.SetAuthCookie(cnp, false);
+                        FormsAuthentication.SetAuthCookie(a.ID.ToString(), false);
 
                         return RedirectToAction("ListaPacienti", "Medic");
 
@@ -147,6 +148,7 @@ namespace proiect1.Controllers
                         aux.SerieBuletin = seria;
                         aux.NrBuletin = nr;
                         aux.Parola = parola;
+                        aux.Role = "Pacient";
 
                         context.Pacients.Add(aux);
                         context.SaveChanges();

@@ -162,6 +162,7 @@
     <Compile Include="Models\CConsultatie.cs" />
     <Compile Include="Models\CMedic.cs" />
     <Compile Include="Models\CPacient.cs" />
+    <Compile Include="Models\MyRoleProvider.cs" />
     <Compile Include="Pacient.cs">
       <DependentUpon>DB_ProiectEH.tt</DependentUpon>
     </Compile>

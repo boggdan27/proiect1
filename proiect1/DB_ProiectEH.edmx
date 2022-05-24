@@ -31,6 +31,7 @@
           <Property Name="Serie_Parafa" Type="nvarchar" MaxLength="50" />
           <Property Name="CNP" Type="nvarchar" MaxLength="13" Nullable="false" />
           <Property Name="Parola" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Role" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'ProiectEH.dbo.Medic_Pacient' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -56,6 +57,7 @@ warning 6002: The table/view 'ProiectEH.dbo.Medic_Pacient' does not have a prima
           <Property Name="Prenume" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Mail" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Parola" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Role" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -174,6 +176,7 @@ warning 6002: The table/view 'ProiectEH.dbo.Medic_Pacient' does not have a prima
           <NavigationProperty Name="Medic_Pacient" Relationship="Self.FK_Medic_Pacient_Medic" FromRole="Medic" ToRole="Medic_Pacient" />
           <Property Name="CNP" Type="String" Nullable="false" MaxLength="13" FixedLength="false" Unicode="true" />
           <Property Name="Parola" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Pacient">
           <Key>
@@ -188,6 +191,7 @@ warning 6002: The table/view 'ProiectEH.dbo.Medic_Pacient' does not have a prima
           <Property Name="Mail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Medic_Pacient" Relationship="Self.FK_Medic_Pacient_Pacient" FromRole="Pacient" ToRole="Medic_Pacient" />
           <Property Name="Parola" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -316,6 +320,7 @@ warning 6002: The table/view 'ProiectEH.dbo.Medic_Pacient' does not have a prima
           <EntitySetMapping Name="Medics">
             <EntityTypeMapping TypeName="ProiectEHModel.Medic">
               <MappingFragment StoreEntitySet="Medic">
+                <ScalarProperty Name="Role" ColumnName="Role" />
                 <ScalarProperty Name="Parola" ColumnName="Parola" />
                 <ScalarProperty Name="Serie_Parafa" ColumnName="Serie_Parafa" />
                 <ScalarProperty Name="CNP" ColumnName="CNP" />
@@ -329,6 +334,7 @@ warning 6002: The table/view 'ProiectEH.dbo.Medic_Pacient' does not have a prima
           <EntitySetMapping Name="Pacients">
             <EntityTypeMapping TypeName="ProiectEHModel.Pacient">
               <MappingFragment StoreEntitySet="Pacient">
+                <ScalarProperty Name="Role" ColumnName="Role" />
                 <ScalarProperty Name="Parola" ColumnName="Parola" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="CNP" ColumnName="CNP" />

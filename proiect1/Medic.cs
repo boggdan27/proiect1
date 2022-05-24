@@ -27,6 +27,7 @@ namespace proiect1
         public string Serie_Parafa { get; set; }
         public string CNP { get; set; }
         public string Parola { get; set; }
+        public string Role { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Medic_Pacient> Medic_Pacient { get; set; }
