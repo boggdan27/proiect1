@@ -177,8 +177,8 @@
             data: {
                 param: obiect
             }
-        }).done(function () {
-            console.log("register");
+        }).done(function (data) {
+            window.location.href = data.redirecturl;
         });
     }
 </script>

@@ -159,7 +159,8 @@ namespace proiect1.Controllers
 
             }
 
-            return RedirectToAction("Index");
+            return Json(new { redirecturl = Url.Action("Vizualizare_Permise", "Home") }, JsonRequestBehavior.AllowGet);
+
         }
 
 
