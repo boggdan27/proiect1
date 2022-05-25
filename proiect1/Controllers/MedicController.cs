@@ -7,6 +7,9 @@ using System.Web.Mvc;
 
 namespace proiect1.Controllers
 {
+
+
+    [Authorize(Roles ="Medic")]
     public class MedicController : Controller
     {
         // GET: Medic
@@ -14,6 +17,7 @@ namespace proiect1.Controllers
         {
             return View();
         }
+        
         
         public ActionResult ListaPacienti()
         {

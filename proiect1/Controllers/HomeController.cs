@@ -79,7 +79,6 @@ namespace proiect1.Controllers
 
                     Session["user"] = a;
                     FormsAuthentication.SetAuthCookie(cnp, false);
-                    FormsAuthentication.SetAuthCookie(a.ID.ToString(), false);
 
                     return RedirectToAction("ListaConsultatii");
                 }

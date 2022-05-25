@@ -31,16 +31,15 @@ namespace proiect1.Models
             throw new NotImplementedException();
         }
       
-        public override string[] GetRolesForUser(string cnp)
+        public override string[] GetRolesForUser(string CNP)
         {
             using (var context = new ProiectEHEntities1())
             {
-                var objuser = context.Medics.Where(x => x.CNP == cnp).FirstOrDefault();
-
+                var objuser = context.Medics.Where(x => x.CNP == CNP).FirstOrDefault();
                 if(objuser == null)
                 {
-                    //este pacientq
-                    var pacient = context.Pacients.Where(x => x.CNP == cnp).FirstOrDefault();
+                    //este pacient
+                    var pacient = context.Pacients.Where(x => x.CNP == CNP).FirstOrDefault();
                     string[] rez = new string[] { pacient.Role };
                     return rez;
 

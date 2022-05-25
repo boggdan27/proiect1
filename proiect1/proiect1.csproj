@@ -133,6 +133,7 @@
     </Compile>
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Models\ConsultatieCreare.cs" />
+    <Compile Include="Models\CUserRole.cs" />
     <Compile Include="Models\JqueryDataTableParam.cs" />
     <Compile Include="Controllers\MedicController.cs" />
     <Compile Include="DB_ProiectEH.Context.cs">

@@ -44,10 +44,18 @@
     <div class="topnav">
         @if (User.Identity.IsAuthenticated)
         {
-            
-            <span class="nav-main-link-name">@Html.ActionLink("Lista Consultatii", "ListaConsultatii", "Home")</span>
-            <span class="nav-main-link-name">@Html.ActionLink("Lista Pacienti", "ListaPacienti", "Medic")</span>
-            <span class="nav-main-link-name">@Html.ActionLink("Creeaza raport consultatie", "CreareConsultatie", "Medic")</span>
+            if (HttpContext.Current.User.IsInRole("Medic"))
+            {
+                <span class="nav-main-link-name">@Html.ActionLink("Lista Pacienti", "ListaPacienti", "Medic")</span>
+                <span class="nav-main-link-name">@Html.ActionLink("Creeaza raport consultatie", "CreareConsultatie", "Medic")</span>
+            }
+
+            if (HttpContext.Current.User.IsInRole("Pacient"))
+            {
+                <span class="nav-main-link-name">@Html.ActionLink("Lista Consultatii", "ListaConsultatii", "Home")</span>
+
+            }
+
 
             <span class="nav-main-link-name">@Html.ActionLink("Delogare", "Delogare", "Home")</span>
         }
